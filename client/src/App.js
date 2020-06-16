@@ -9,6 +9,8 @@ import ItemModal from './components/ItemModal';
 import {Container,Button} from 'reactstrap';
 import {BrowserRouter,Redirect,Route, NavLink} from 'react-router-dom';
 import form from './components/form';
+import draftform from './components/draftform';
+
 import {loadUser} from './actions/authActions';
 import screens from './components/screens';
 import PropTypes from 'prop-types';
@@ -25,7 +27,8 @@ class App extends Component{
       <AppNavbar/>
 
       <Route exact path ='/form/screens' component={screens}/>
-      <Route exact path='/form' component={form}/>     
+      <Route exact path='/form' component={form}/> 
+      <Route exact path='/draftform' component={draftform}/>     
     </div>
     </BrowserRouter>
     </Provider>

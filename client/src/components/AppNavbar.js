@@ -16,6 +16,7 @@ import RegisterModal from './auth/RegisterModal';
 import Logout from './auth/Logout';
 import LoginModal from './auth/LoginModal';
 import form from './form';
+import draftform from './draftform'
 class AppNavbar extends Component{
     state={
         isOpen:false,
@@ -48,7 +49,7 @@ toggle=()=>{
              <NavLink href="/form">form</NavLink>
          </NavItem>         
          <NavItem>
-            <NavLink href="/update">update</NavLink>
+            <NavLink href="/draftform">draftform</NavLink>
          </NavItem>
         </Fragment>
     );
