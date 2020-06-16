@@ -46,6 +46,9 @@ toggle=()=>{
          </NavItem> 
          <NavItem>
              <NavLink href="/form">form</NavLink>
+         </NavItem>         
+         <NavItem>
+            <NavLink href="/update">update</NavLink>
          </NavItem>
         </Fragment>
     );
