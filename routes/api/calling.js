@@ -74,6 +74,26 @@ exports.get5=function(req,res){
      }
    });
 };
+exports.get6=function(req,res,empid){
+  db.executeSql("SELECT * FROM UserAccess_Header where Emp_ID ='"+empid+"'",function(data,err){
+   if(err){
+     httpMsgs.show500(req,res,err);
+    }
+    else{
+     httpMsgs.sendJson(req,res,data);
+    }
+  });
+};
+exports.get7=function(req,res,empid){
+  db.executeSql("SELECT Emp_ID FROM UserAccess_Header",function(data,err){
+   if(err){
+     httpMsgs.show500(req,res,err);
+    }
+    else{
+     httpMsgs.sendJson(req,res,data);
+    }
+  });
+};
 exports.add=function(req,resp,reqbody){
   try{
     if(!reqbody) throw new Error("Input not valid");
