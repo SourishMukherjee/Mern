@@ -28,7 +28,8 @@ class form extends Component{
         software:'FS',
         reason:'',
         key:'',
-        done:''
+        done:'',
+        draft:'false'
         
     }
    
@@ -78,7 +79,8 @@ class form extends Component{
             Software:this.state.software,
             Reason:this.state.reason,
             Trans_Datetime:dateFormat(now, "yyyy-mm-dd H:MM:ss "),
-            UserAccess_Headerkey:this.state.key
+            UserAccess_Headerkey:this.state.key,
+            Draft:this.state.draft
         }
         
         this.props.addItem(newItem);
@@ -217,12 +219,16 @@ class form extends Component{
                                <Input type="textarea" name="reason" id="reason"onChange={this.handlechange1}/>
                                </Col>
                             </FormGroup>
+                            
                             <FormGroup check row>
-                               <Col sm={{ size: 10, offset: 3 }}>
+                                <Col sm={{ size: 10, offset: 3 }}>
                                  <Button >Save and Next</Button>
-                                   </Col>
-                                 </FormGroup>
-                          </Form>            
+                                </Col>
+                                {/* <Col sm={{ size: 10, offset: 3 }}>
+                                 <Button >Save as Draft</Button>
+                                </Col> */}
+                            </FormGroup>
+                </Form>            
             </div>
         );
     }

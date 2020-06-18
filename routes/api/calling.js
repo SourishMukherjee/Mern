@@ -84,7 +84,7 @@ exports.get6=function(req,res,empid){
     }
   });
 };
-exports.get7=function(req,res,empid){
+exports.get7=function(req,res){
   db.executeSql("SELECT Emp_ID FROM UserAccess_Header",function(data,err){
    if(err){
      httpMsgs.show500(req,res,err);

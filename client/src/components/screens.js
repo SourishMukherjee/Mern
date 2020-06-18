@@ -35,7 +35,7 @@ class screens extends Component{
               this.setState({
                   screens:res.data
               })
-              
+              console.log(res.data)
               console.log(this.state.screens)
           })
           

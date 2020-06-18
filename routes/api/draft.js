@@ -10,7 +10,7 @@ router.get('/',(req,res)=>{
 
 router.post('/',(req,res)=>{
     
-    const empid=req.body.empid;
+    const empid= req.body.empid;
     call.get6(req,res,empid);
 })
 
