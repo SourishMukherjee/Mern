@@ -15,7 +15,7 @@ router.post('/',(req,res)=>{
 })
 
 router.post('/save',(req,res)=>{
-     call.add(req,res,JSON.stringify(req.body));
+     call.add4(req,res,JSON.stringify(req.body));
 })
 
 module.exports=router;

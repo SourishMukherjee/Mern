@@ -31,7 +31,7 @@ class draftform extends Component{
         reason:'',
         key:'',
         done:'',
-        draft:'true',
+        status:'draft',
         item: []
     }
 
@@ -45,23 +45,24 @@ class draftform extends Component{
         axios.post('/api/draft',this.state)
         .then(res=>{
               var r = res.data;
+              var x = r[0];
               console.log(r);
             this.setState({
-                type:r.Trans_Type,
-                branch:r.Location,
-                name:r.Emp_Name,
-                desig:r.Emp_Designation,
-                depart:r.Emp_Department,
-                empid:r.Emp_ID,
-                email:r.Emp_Email,
-                doj:r.DOJ,
-                emptype:r.Employee_Type,
-                software:r.Software,
-                reason:r.Reason,
-                key:r.UserAccess_Headerkey,
-                drafte:r.Draft
+                type:x.Trans_Type,
+                branch:x.Location,
+                name:x.Emp_Name,
+                desig:x.Emp_Designation,
+                depart:x.Emp_Department,
+                empid:x.Emp_ID,
+                email:x.Emp_Email,
+                doj:dateFormat(x.DOJ, "yyyy-mm-dd"),
+                emptype:x.Employee_Type,
+                software:x.Software,
+                reason:x.Reason,
+                key:x.UserAccess_Headerkey,
+                status:x.Status
             })
-
+             
             console.log(this.state)
         })
 
@@ -82,7 +83,7 @@ class draftform extends Component{
              reason:'',
              key:'',
              done:'',
-             draft:'true',
+             status:'draft',
           })
       }
 
@@ -102,37 +103,16 @@ class draftform extends Component{
         const value=e.target.value;
         this.setState({[e.target.name]:value});
         console.log(value);
-        // if(e.target.name==='empid'){
-        //     this.getheader()
-        //}
+        
     }
 
-    // getheader=()=>{
-    //     var v='';
-    //     axios.get('api/items/key')
-    //     .then(res=>{
-    //         v=res.data[0][''];
-    //        // console.log(v);
-    //         if(v==null){
-    //            this.setState({
-    //                key:1
-    //            })
-    //         }
-    //         else {
-    //             v=v+1
-    //             this.setState({
-    //                 key:v
-    //             })
-    //         }
-    //     })
-    // }
 
     onSubmit=(event)=>{
 
         //event.preventDefault();
         var now = new Date();
         this.setState({
-            draft:'false'
+            status:'approved'
           })
         const newItem={
             Trans_Type:this.state.type,
@@ -148,7 +128,7 @@ class draftform extends Component{
             Reason:this.state.reason,
             Trans_Datetime:dateFormat(now, "yyyy-mm-dd H:MM:ss "),
             UserAccess_Headerkey:this.state.key,
-            Draft:this.state.draft
+            Status:this.state.status
         }
 
         axios.post('api/draft/save',newItem)
@@ -184,6 +164,7 @@ class draftform extends Component{
             //disabled={this.state.boola}
             renderInput={(params)=><TextField {...params} label="EmpId" variant="outlined"/>}
             />                                        {/* @ */}
+           
                 <Form onSubmit={this.onSubmit}>
                 <FormGroup tag="fieldset" row>
                             <legend className="col-form-label col-sm-5">FS User Access Request type:</legend>
@@ -270,7 +251,7 @@ class draftform extends Component{
                          <FormGroup row>
                              <Label for="doj"sm={3}>Date of Joining</Label>
                              <Col sm={5}>
-                                   <Input
+                                   <Input                                     
                                      type="date"
                                       name="doj"
                                       id="doj"

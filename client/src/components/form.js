@@ -29,7 +29,7 @@ class form extends Component{
         reason:'',
         key:'',
         done:'',
-        draft:'false'
+        status:'draft'
         
     }
    
@@ -66,6 +66,9 @@ class form extends Component{
         
         //event.preventDefault();
         var now = new Date();
+        this.setState({
+            status:'approved'   // changes status to approved when we select save and next( this function shd be triggered from the screens page later)
+          })
         const newItem={
             Trans_Type:this.state.type,
             Location:this.state.branch,
@@ -80,7 +83,7 @@ class form extends Component{
             Reason:this.state.reason,
             Trans_Datetime:dateFormat(now, "yyyy-mm-dd H:MM:ss "),
             UserAccess_Headerkey:this.state.key,
-            Draft:this.state.draft
+            Status:this.state.status
         }
         
         this.props.addItem(newItem);

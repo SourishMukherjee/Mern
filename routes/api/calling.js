@@ -119,6 +119,7 @@ exports.add=function(req,resp,reqbody){
     httpMsgs.show500(req,resp,ex);
   }
 };
+
 exports.add2=function(req,resp,reqbody){
   try{
     if(!reqbody) throw new Error("Input not valid");
@@ -155,6 +156,32 @@ exports.add3=function(req,resp,reqbody){
     if(data){
         var sql="INSERT INTO UserAccess_Detail(Module,Screens,Trans_Datetime,UserAccess_Headerkey) VALUES";
         sql+= util.format("('%s','%s','%s','%d')",data.Module,data.Screens,data.Trans_Datetime,data.UserAccess_Headerkey);
+        db.executeSql(sql,function(data,err){
+            if(err){ 
+             httpMsgs.show500(req,resp,err);
+            }
+            else{
+             httpMsgs.send200(req,resp);
+            }
+            });
+    }
+    else{
+         throw new Error("Input not valid");
+    }
+  }
+  catch(ex){
+    httpMsgs.show500(req,resp,ex);
+  }
+};
+
+exports.add4=function(req,resp,reqbody){
+  try{
+    if(!reqbody) throw new Error("Input not valid");
+    
+    var data = JSON.parse(reqbody);
+    if(data){
+        var sql=util.format("UPDATE UserAccess_Header SET Trans_Type ='%s',Location ='%s',Reason ='%s',Emp_ID ='%d',Emp_Name ='%s',Emp_Designation ='%s',Emp_Department ='%s',Emp_Email ='%s',DOJ ='%s',Employee_Type ='%s',Software ='%s',Trans_Datetime ='%s',UserAccess_Headerkey ='%d',Status ='%s' WHERE Emp_ID ='%d'",data.Trans_Type,data.Location,data.Reason,data.Emp_ID,data.Emp_Name,data.Emp_Designation,data.Emp_Department,data.Emp_Email,data.DOJ,data.Employee_Type,data.Software,data.Trans_Datetime,data.UserAccess_Headerkey,data.Status,data.Emp_ID);
+               
         db.executeSql(sql,function(data,err){
             if(err){ 
              httpMsgs.show500(req,resp,err);
